@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prefinals</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pre-Finals</title>
 </head>
 <body>
-
-  <h2>Pre Finals</h2>
-
-  <label for="numberInput">Enter a number: </label>
-  <input type="text" id="numberInput" />
-  <button onclick="analyzeNumber()">Calculate</button>
-
-  <p id="result"></p>
-
-  <script>
-    function analyzeNumber() {
-      var inputNumber = parseInt(document.getElementById("numberInput").value);
-      var isOdd = inputNumber % 2 !== 0;
-      var isEven = !isOdd;
-      var isPrime = isPrimeNumber(inputNumber);
-
-      var oddNumbers = [];
-      var evenNumbers = [];
-
-      for (var i = 1; i <= inputNumber; i++) {
-        if (i % 2 !== 0) {
-          oddNumbers.push(i);
-        } else {
-          evenNumbers.push(i);
+    <form onsubmit="calculate(); return false;">
+        <Label>Input:</Label>
+        <input type="number" id="num1" placeholder="Enter Number">
+        <input type="submit" id="submit"><br><br>
+        <p id="d1"></p>
+        <p id="d2"></p>
+    </form>
+    <script>
+        //5 is a prime no.
+        //odd no. 1,3,5
+        //even no. 2,4
+        //oddeven(param)
+        //isPrime(param)
+        //num % 2 !== 0
+        function oddeven(){
+            let num = document.getElementById('num1').value;
+            
+            document.getElementById('d1').innerHTML= "Odd no. " + odd;
         }
-      }
 
-      var resultMessage = `Number: ${inputNumber}<br>
-                           Odd Numbers: ${oddNumbers.length > 0 ? oddNumbers.join(', ') : 'No odd numbers'}<br>
-                           Even Numbers: ${evenNumbers.length > 0 ? evenNumbers.join(', ') : 'No even numbers'}<br>
-                           Is Prime: ${isPrime ? 'Yes' : 'No'}`;
+        function calculate(){
+            let num = document.getElementById('num1').value;
+            let isPrime = true;
+            let odd='';
+            let even='';
+            let i = 0;
 
-      document.getElementById("result").innerHTML = resultMessage;
-    }
+            for(let i = 2; i < num; i++){
+                if(num % i === 0){
+                    isPrime = false;
+                    break;
+                }
+            }
 
-    function isPrimeNumber(num) {
-      if (num <= 1) return false;
-      for (var i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) {
-          return false;
+            for(i; i <= num; ++i){
+                if(i % 2 !== 0){
+                    odd = odd + i + ', ';
+                }
+                else {
+                    even = even + i + ', ';
+                }
+            }
+
+            let result = num + " is ";
+            result += isPrime ? 'a prime no.<br>' : 'not a prime no.<br>';
+            result += 'odd no. ' + odd + '<br>';
+            result += 'even no.' + even + '<br>';
+
+            document.getElementById('d1').innerHTML=result;
+
+            
+
         }
-      }
-      return true;
-    }
-  </script>
-
+    </script>
 </body>
 </html>
